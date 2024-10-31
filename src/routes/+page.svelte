@@ -1,6 +1,12 @@
 <script>
     import Header from "$lib/Header.svelte"
     import { onMount } from "svelte";
+    import Profile from "../lib/Profile.svelte";
+
+    export let data;
+    //console.log(data)
+    const profiles = data.profiles.data;
+    console.log(profiles);
 
     let codeInput;
     let codeOutput;
@@ -65,6 +71,9 @@
 
 </div>
 
+{#each profiles as profile}
+    <Profile {profile} />
+{/each}
 
 
 <style>
