@@ -10,6 +10,10 @@
     let codeOutput;
     let textArea;
     let lineNumbers;
+    let reviewContainer;
+
+    let starsSliderValue;
+    $: console.log(starsSliderValue);
 
     function assembleCode() {
         codeOutput = codeInput;
@@ -43,6 +47,10 @@
         lineNumbers.scrollTop = textArea.scrollTop;
     }
 
+    function submitReview() {
+        //reviewContainer.appendChild(<Profile {} >);
+    }
+
     onMount(() => {
         codeInput.focus();
         updateLineNumbers();
@@ -68,9 +76,12 @@
 
 </div>
 
-{#each profiles as profile}
-    <Profile {profile} />
-{/each}
+<div class="reviewcontainer" bind:this={reviewContainer}>
+    {#each profiles as profile}
+        <Profile {profile} />
+    {/each}
+</div>
+
 
 <form>
     <h3>Feel free to leave a review</h3>
@@ -78,10 +89,13 @@
     <label for="name">Enter your name: </label>
     <input type="text" name="name" id ="name" required />
 
-    <label for="review">Your review:</label>
-    <input type="textArea" name="review" id="review" placeholder="This is the greatest website I have ever visited" required/>
+    <label for="stars">You've rated us {starsSliderValue}</label>
+    <input type="range" name="stars" id="stars" min="1" max="5" step="1" on:change={(e) => starsSliderValue = e.detail.value}/>
 
-    <input type="submit" value="Submit" id="submitbutton"/>
+    <label for="review">Your review:</label>
+    <input type="textArea" name="review" id="review" placeholder="This is the greatest website I have ever visited" required />
+
+    <input type="submit" value="Submit" id="submitbutton" on:click{submitReview} />
 </form>
 
 <style>
