@@ -57,6 +57,7 @@
 
     function handleKey(event) {
         updateLineNumbers();
+        if(event.key == "Enter") translate();
         if (event.repeat) return;
     }
 
@@ -102,6 +103,7 @@
 
 <div class="contentcontainer">
 
+    <!--Container for text areas-->
     <div class="cardcontainer">
 
         <div class="editor">
@@ -116,24 +118,27 @@
                 on:keyup={handleKey}
                 on:keydown={handleKey}
                 on:scroll={syncScroll}
-                placeholder="Insert code here..."></textarea>
+                placeholder="English text here..."></textarea>
         </div>
 
         <button class="submitbutton" on:click={translate}>
             <p>Translate!</p>
         </button>
 
+        <!--Pig Latin Output Box-->
         <div class="output">
             <pre>{codeOutput}</pre>
         </div>
     </div>
 
+    <!--Auto generated reviews-->
     <div class="reviewcontainer" bind:this={reviewContainer}>
         {#each reviews as profile}
             <Profile {profile} />
         {/each}
     </div>
 
+    <!--Review Card-->
     <form class="reviewform" on:submit|preventDefault={submitReview}>
         <h3>Feel free to leave a review</h3>
 
@@ -276,6 +281,12 @@
         width: 100%;
         height: 100%;
         background-color: red;
+        border-radius: 5px;
+        box-shadow: inset 0px 0px 5px black;
+    }
+
+    .submitbutton:hover {
+        box-shadow: inset 0px 0px 15px black;
     }
 
     /* Review Form Styles */

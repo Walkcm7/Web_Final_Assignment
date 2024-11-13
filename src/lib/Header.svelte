@@ -27,9 +27,13 @@
         justify-content: space-between;
         align-items: center;
         width: 100%;
-        padding-top: 1em;
-        padding-bottom: 1em;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
         background-color: #7fffd4;
+        box-shadow: 0 5px 5px darkgrey;
+        top: 0;
+        position: sticky;
+        z-index: 999;
     }
 
     h1 {
@@ -86,7 +90,9 @@
         display: block;
     }
 
-    .dropdown:hover .dropdown-content {display: block;}
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
 
     @media (max-width: 1320px) {
         h1 {
