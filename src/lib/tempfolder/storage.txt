@@ -12,12 +12,14 @@
     let userName = '';
     let rating = 5; // Default rating
 
+    // Reviews list, initially populated with the profile data
     let reviews = profiles.map(profile => ({
         ...profile,
         reviewText: 'This is the greatest website I have ever visited',
         rating: 5,
     }));
 
+    // Assemble code functionality (existing)
     function assembleCode() {
         codeOutput = codeInput;
     }
@@ -37,24 +39,20 @@
         lineNumbers.scrollTop = textArea.scrollTop;
     }
 
+    // Submit the review
     function submitReview(event) {
         event.preventDefault();
         
-        const newReview = {
+        // Add the new review
+        reviews.push({
             first_name: userName,
-            last_name: '',
+            last_name: '', // Can be extended to support last name
             avatar: 'https://www.gravatar.com/avatar/placeholder',
             reviewText: reviewText,
             rating: rating,
-        };
+        });
 
-        console.log('Adding new review:', newReview);
-
-        reviews = [
-            ...reviews,
-            newReview
-        ];
-
+        // Reset the form fields
         userName = '';
         reviewText = '';
         rating = 5;
@@ -93,12 +91,14 @@
         </div>
     </div>
 
+    <!-- Reviews Section -->
     <div class="reviewcontainer" bind:this={reviewContainer}>
         {#each reviews as profile}
             <Profile {profile} />
         {/each}
     </div>
 
+    <!-- Review Form -->
     <form class="reviewform" on:submit|preventDefault={submitReview}>
         <h3>Feel free to leave a review</h3>
 
@@ -326,7 +326,7 @@
 
     .rate:not(:checked) > input {
         position: absolute;
-        visibility: hidden;
+        top: -9999px;
     }
 
     .rate:not(:checked) > label {

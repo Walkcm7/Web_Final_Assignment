@@ -1,62 +1,66 @@
 <script>
     export let profile;
+
+    // Construct full name and ensure there's a space only if the last name exists
+    const fullName = profile.first_name + (profile.last_name ? " " + profile.last_name : "");
 </script>
 
-<article>
-    <img src={profile.avatar} alt="This users profile avatar">
-    <h3>{profile.first_name} {profile.last_name}</h3>
-    <p><em>This is the greatest website I have ever visited</em></p>
-    <figure>
-        <img src="src\lib\SVG\gold-star.svg" alt="gold star" class="star">
-        <img src="src\lib\SVG\gold-star.svg" alt="gold star" class="star">
-        <img src="src\lib\SVG\gold-star.svg" alt="gold star" class="star">
-        <img src="src\lib\SVG\gold-star.svg" alt="gold star" class="star">
-        <img src="src\lib\SVG\black-star.svg" alt="black star" class="star">
+<article class="user-profile">
+    <img src={profile.avatar} alt="{fullName}'s profile avatar" class="avatar">
+    <div class="profile-content">
+        <h3>{fullName}</h3>
+        <p><em>{profile.reviewText}</em></p>
+    </div>
+    <figure class="rating" aria-label="Rating of {profile.rating} out of 5">
+        {'★'.repeat(profile.rating)}{'☆'.repeat(5 - profile.rating)}
     </figure>
-
 </article>
 
 <style>
-
-    article {
-        display: grid;
-        grid-template-columns: 1fr 4fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        border: 1px solid black;
-        border-radius: 5px;
-        width: 60%;
-        justify-self: center;
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
+    .user-profile {
+        display: flex;
+        align-items: flex-start;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1.5em;
+        margin: 0.6em 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 1000px;
+        width: 100%;
+        gap: 16px;
     }
 
-    img {
+    .avatar {
+        width: 5em;
+        height: 5em;
         border-radius: 50%;
-        grid-column: 1 / span 1;
-        grid-row: 1 / span 2;
-        margin: 0.5em;
+        object-fit: cover;
+        margin-right: 16px;
     }
 
-    h3 {
-        grid-column: 2 / span 1;
-        grid-row: 1 / span 1;
-        padding-top: 1em;
+    .profile-content {
+        flex-grow: 1;
     }
 
-    p {
-        grid-column: 2 / span 2;
-        grid-row: 2 / span 1;
+    .profile-content h3 {
+        margin: 0;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #333;
     }
 
-    figure {
-        grid-column: 3 / span 1;
-        grid-row: 1 / span 1;
-        padding-top: 0.5em;
+    .profile-content p {
+        margin: 8px 0 0 0;
+        font-style: italic;
+        color: #666;
+        font-size: 1rem;
     }
 
-    .star {
-        width: 1em;
-        height: auto;
+    .rating {
+        font-size: 1.5rem;
+        color: #ffc700;
+        margin-left: 16px;
+        display: inline-block;
     }
-
 </style>
