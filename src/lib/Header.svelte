@@ -1,6 +1,6 @@
 
 <header>
-    <h1>6502 Assembly to Hex Converter</h1>
+    <h1>Pig Latin Translator</h1>
     <nav>
         <ul>
             <li>Uno</li>

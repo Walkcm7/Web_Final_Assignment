@@ -1,7 +1,6 @@
 <script>
     export let profile;
 
-    // Construct full name and ensure there's a space only if the last name exists
     const fullName = profile.first_name + (profile.last_name ? " " + profile.last_name : "");
 </script>
 
@@ -32,11 +31,11 @@
     }
 
     .avatar {
-        width: 5em;
-        height: 5em;
+        width: 6em;
+        height: 6em;
         border-radius: 50%;
         object-fit: cover;
-        margin-right: 16px;
+        margin-right: 1em;
     }
 
     .profile-content {

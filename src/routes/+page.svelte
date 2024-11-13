@@ -18,8 +18,41 @@
         rating: 5,
     }));
 
-    function assembleCode() {
-        codeOutput = codeInput;
+    function translate() {
+        let lines = codeInput.split('\n'); // Split the input into an array of lines
+        let translatedLines = lines.map(line => {
+            // Split the line into words
+            let words = line.split(/\s+/);  // Split by spaces and tabs
+            
+            // Translate each word individually
+            let translatedWords = words.map(word => {
+                let str = word.trim().toLowerCase(); // Clean each word
+                
+                if (!str) {
+                    return ''; // If the word is empty, return it as is
+                }
+
+                // Find the first vowel
+                var n = str.search(/[aeiou]/);
+
+                if (n === 0) {
+                    // If the word starts with a vowel, add 'way'
+                    return str + "way";
+                } else if (n === -1) {
+                    // If no vowels are found, add 'ay'
+                    return str + "ay";
+                } else {
+                    // Standard case: word starts with a consonant
+                    return str.replace(/([^aeiou]*)([aeiou]\w*)/, "$2$1ay");
+                }
+            });
+
+            // Join the translated words back into a single line
+            return translatedWords.join(' ');
+        });
+
+        // Join the translated lines back together with newlines
+        codeOutput = translatedLines.join('\n');
     }
 
     function handleKey(event) {
@@ -64,10 +97,13 @@
         codeInput.focus();
         updateLineNumbers();
     });
+
 </script>
 
 <div class="contentcontainer">
+
     <div class="cardcontainer">
+
         <div class="editor">
             <div class="linenumbers">
                 {#each lineNumbers as line}
@@ -80,12 +116,11 @@
                 on:keyup={handleKey}
                 on:keydown={handleKey}
                 on:scroll={syncScroll}
-                placeholder="Insert code here..."
-            ></textarea>
+                placeholder="Insert code here..."></textarea>
         </div>
 
-        <button class="submitbutton" on:click={assembleCode}>
-            <p>Assemble</p>
+        <button class="submitbutton" on:click={translate}>
+            <p>Translate!</p>
         </button>
 
         <div class="output">
@@ -108,8 +143,7 @@
             name="name"
             id="name"
             bind:value={userName}
-            required
-        />
+            required/>
 
         <div class="rate">
             <input
@@ -117,41 +151,41 @@
                 id="star5"
                 name="rate"
                 value="5"
-                bind:group={rating}
-            />
+                bind:group={rating}/>
             <label for="star5" title="5 stars">5 stars</label>
+
             <input
                 type="radio"
                 id="star4"
                 name="rate"
                 value="4"
-                bind:group={rating}
-            />
+                bind:group={rating}/>
             <label for="star4" title="4 stars">4 stars</label>
+
             <input
                 type="radio"
                 id="star3"
                 name="rate"
                 value="3"
-                bind:group={rating}
-            />
+                bind:group={rating}/>
             <label for="star3" title="3 stars">3 stars</label>
+
             <input
                 type="radio"
                 id="star2"
                 name="rate"
                 value="2"
-                bind:group={rating}
-            />
+                bind:group={rating}/>
             <label for="star2" title="2 stars">2 stars</label>
+
             <input
                 type="radio"
                 id="star1"
                 name="rate"
                 value="1"
-                bind:group={rating}
-            />
+                bind:group={rating}/>
             <label for="star1" title="1 star">1 star</label>
+
         </div>
 
         <textarea
@@ -160,8 +194,7 @@
             placeholder="This is the greatest website I have ever visited"
             rows="3"
             maxlength="300"
-            required
-        ></textarea>
+            required></textarea>
 
         <input type="submit" value="Submit" id="submitbutton" />
     </form>
@@ -235,7 +268,7 @@
         grid-row: 1 / span 2;
         padding-left: 0.6em;
         padding-top: 0.4em;
-        background-color: blue;
+        background-color: lightgray;
     }
 
     /* Assemble Button */
