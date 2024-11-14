@@ -74,7 +74,7 @@
         const newReview = {
             first_name: userName,
             last_name: '',
-            avatar: "../lib/Images/Profile_avatar_placeholder_large.png",
+            avatar: "src/lib/Images/Profile_avatar_placeholder_large.png",
             reviewText: reviewText,
             rating: rating,
         };
