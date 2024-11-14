@@ -3,3 +3,13 @@
     margin: 0;
     padding: 0;
 }
+
+a {
+    text-decoration: none;
+    color: #fAf9f6;
+}
+
+.contentcontainer {
+    background-color: #202020;
+    color: #fAf9f6
+}
