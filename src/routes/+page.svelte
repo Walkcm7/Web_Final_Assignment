@@ -4,10 +4,11 @@
 
     export let data;
     const profiles = data.profiles.data;
-    let codeInput;
-    let codeOutput = "And your translated text will appear here...";
-    let textArea;
-    let reviewContainer;
+
+    let textInput; //User text input box
+    let textOutput = "And your translated text will appear here..."; 
+    let textArea; //Translated text box
+    let reviewContainer; 
     let reviewText = '';
     let userName = '';
     let rating = 5; // Default rating
@@ -18,8 +19,11 @@
         rating: 5,
     }));
 
+    /*
+        Translate the text in the input box into pig latin and output the translation to textOutput
+    */
     function translate() {
-        let lines = codeInput.split('\n'); 
+        let lines = textInput.split('\n'); 
         let translatedLines = lines.map(line => {
 
             let words = line.split(/\s+/);
@@ -33,19 +37,19 @@
 
                 var n = str.search(/[aeiou]/);
 
-                if (n === 0) {
+                if (n === 0) { //Word starts with vowel
                     return str + "way";
-                } else if (n === -1) {
+                } else if (n === -1) { //Word contains no vowels
                     return str + "ay";
                 } else {
-                    return str.replace(/([^aeiou]*)([aeiou]\w*)/, "$2$1ay");
+                    return str.replace(/([^aeiou]*)([aeiou]\w*)/, "$2$1ay"); //Word begins with consonant
                 }
             });
 
             return translatedWords.join(' ');
         });
 
-        codeOutput = translatedLines.join('\n');
+        textOutput = translatedLines.join('\n');
     }
 
     function handleKey(event) {
@@ -54,9 +58,9 @@
         if (event.repeat) return;
     }
 
-    let lineNumbers = 1;
+    let lineNumbers = 1; //Reactive implementation wouldn't work, TODO:// replace with Svelte Reactive implementation
     function updateLineNumbers() {
-        const lines = codeInput.split('\n').length;
+        const lines = textInput.split('\n').length;
         lineNumbers = Array.from({ length: lines }, (_, i) => i + 1);
     }
 
@@ -75,8 +79,6 @@
             rating: rating,
         };
 
-        console.log('Adding new review:', newReview);
-
         reviews = [
             ...reviews,
             newReview
@@ -88,8 +90,7 @@
     }
 
     onMount(() => {
-        codeInput.focus();
-        updateLineNumbers();
+        textInput.focus();
     });
 
 </script>
@@ -105,8 +106,9 @@
                     <div>{line}</div>
                 {/each}
             </div>
+            <!--Text input box-->
             <textarea
-                bind:value={codeInput}
+                bind:value={textInput}
                 bind:this={textArea}
                 on:keyup={handleKey}
                 on:keydown={handleKey}
@@ -114,13 +116,14 @@
                 placeholder="English text here..."></textarea>
         </div>
 
+        <!--Translate button-->
         <button class="submitbutton" on:click={translate}>
             <p>Translate!</p>
         </button>
 
         <!--Pig Latin Output Box-->
         <div class="output">
-            <pre>{codeOutput}</pre>
+            <pre>{textOutput}</pre>
         </div>
     </div>
 
@@ -203,8 +206,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: #202020;
-        color: #fAf9f6;
     }
 
     /* Card Container */
@@ -221,7 +222,7 @@
         justify-self: center;
     }
 
-    /* Editor Section */
+    /* Text Input Section */
     .editor {
         width: 100%;
         height: 100%;
@@ -250,7 +251,7 @@
         color: #121212;
     }
 
-    /* Textarea */
+    /* Output text area */
     textarea {
         width: 100%;
         height: 100%;
@@ -263,7 +264,6 @@
         overflow: auto;
     }
 
-    /* Output Section */
     .output {
         width: 100%;
         min-height: 100%;
@@ -275,7 +275,7 @@
         color: rgba(18, 18, 18, 0.7);
     }
 
-    /* Assemble Button */
+    /* Translate Button */
     .submitbutton {
         width: 100%;
         height: 100%;
@@ -317,7 +317,7 @@
         margin-bottom: 8px;
     }
 
-    /* Input Fields */
+    /* Review text box */
     .reviewtextarea {
         width: 100%;
         padding: 10px;
@@ -338,7 +338,7 @@
         height: 120px;
     }
 
-    /* Submit Button Styles */
+    /* Submit Review Button Styles */
     #submitbutton {
         width: 100%;
         padding: 12px;
