@@ -9,14 +9,6 @@
             <li>Quatro</li>
             <li>Cinco</li>
         </ul>
-        <div class="dropdown">
-            <button class="dropbtn">Dropdown</button>
-            <div class="dropdown-content">
-              <a href="google.com">Link 1</a>
-              <a href="google.com">Link 2</a>
-              <a href="google.com">Link 3</a>
-            </div>
-          </div>
     </nav>
 </header>
 
@@ -29,8 +21,9 @@
         width: 100%;
         padding-top: 0.5em;
         padding-bottom: 0.5em;
-        background-color: #7fffd4;
-        box-shadow: 0 5px 5px darkgrey;
+        background-color: #A52422;
+        box-shadow: 0px 5px 10px #202020;
+        color: #fefefe;
         top: 0;
         position: sticky;
         z-index: 999;
@@ -60,40 +53,6 @@
         padding: 0.5em;
     }
 
-    .dropdown {
-        display: inline-block;
-        position: relative;
-    }
-
-    .dropbtn {
-        background-color: #04AA6D;
-        color: white;
-        padding: 16px;
-        font-size: 16px;
-        border: none;
-        display: none;
-    }
-
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f1f1f1;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-    }
-
-    .dropdown-content a {
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
-
-    .dropdown:hover .dropdown-content {
-        display: block;
-    }
-
     @media (max-width: 1320px) {
         h1 {
             font-size: 200%;
@@ -110,10 +69,6 @@
 
         li {
             display: none;
-        }
-
-        .dropbtn {
-            display: inline-block;
         }
     }
 </style>

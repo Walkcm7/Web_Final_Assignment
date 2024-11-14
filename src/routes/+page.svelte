@@ -5,7 +5,7 @@
     export let data;
     const profiles = data.profiles.data;
     let codeInput;
-    let codeOutput;
+    let codeOutput = "And your translated text will appear here...";
     let textArea;
     let reviewContainer;
     let reviewText = '';
@@ -19,39 +19,32 @@
     }));
 
     function translate() {
-        let lines = codeInput.split('\n'); // Split the input into an array of lines
+        let lines = codeInput.split('\n'); 
         let translatedLines = lines.map(line => {
-            // Split the line into words
-            let words = line.split(/\s+/);  // Split by spaces and tabs
+
+            let words = line.split(/\s+/);
             
-            // Translate each word individually
             let translatedWords = words.map(word => {
-                let str = word.trim().toLowerCase(); // Clean each word
+                let str = word.trim().toLowerCase();
                 
                 if (!str) {
-                    return ''; // If the word is empty, return it as is
+                    return '';
                 }
 
-                // Find the first vowel
                 var n = str.search(/[aeiou]/);
 
                 if (n === 0) {
-                    // If the word starts with a vowel, add 'way'
                     return str + "way";
                 } else if (n === -1) {
-                    // If no vowels are found, add 'ay'
                     return str + "ay";
                 } else {
-                    // Standard case: word starts with a consonant
                     return str.replace(/([^aeiou]*)([aeiou]\w*)/, "$2$1ay");
                 }
             });
 
-            // Join the translated words back into a single line
             return translatedWords.join(' ');
         });
 
-        // Join the translated lines back together with newlines
         codeOutput = translatedLines.join('\n');
     }
 
@@ -77,7 +70,7 @@
         const newReview = {
             first_name: userName,
             last_name: '',
-            avatar: 'https://www.gravatar.com/avatar/placeholder',
+            avatar: "../lib/Images/Profile_avatar_placeholder_large.png",
             reviewText: reviewText,
             rating: rating,
         };
@@ -197,7 +190,6 @@
             class="reviewtextarea"
             bind:value={reviewText}
             placeholder="This is the greatest website I have ever visited"
-            rows="3"
             maxlength="300"
             required></textarea>
 
@@ -211,6 +203,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        background-color: #202020;
+        color: #fAf9f6;
     }
 
     /* Card Container */
@@ -234,6 +228,8 @@
         grid-row: 1 / span 1;
         position: relative;
         overflow: hidden;
+        color: #121212;
+        border-radius: 5px;
     }
 
     /* Line Numbers */
@@ -251,9 +247,10 @@
         box-sizing: border-box;
         overflow: hidden;
         border-right: 1px solid #ccc;
+        color: #121212;
     }
 
-    /* Textarea (Code Output Area) */
+    /* Textarea */
     textarea {
         width: 100%;
         height: 100%;
@@ -266,21 +263,23 @@
         overflow: auto;
     }
 
-    /* Output Section (Displays assembled code) */
+    /* Output Section */
     .output {
         width: 100%;
         min-height: 100%;
         grid-row: 1 / span 2;
         padding-left: 0.6em;
         padding-top: 0.4em;
-        background-color: lightgray;
+        background-color: #eee;
+        border-radius: 5px;
+        color: rgba(18, 18, 18, 0.7);
     }
 
     /* Assemble Button */
     .submitbutton {
         width: 100%;
         height: 100%;
-        background-color: red;
+        background-color: #A52422;
         border-radius: 5px;
         box-shadow: inset 0px 0px 5px black;
     }
@@ -327,7 +326,6 @@
         border-radius: 5px;
         font-size: 1rem;
         box-sizing: border-box;
-        transition: border-color 0.3s ease;
         resize: none;
     }
 
@@ -344,21 +342,20 @@
     #submitbutton {
         width: 100%;
         padding: 12px;
-        background-color: #2a91ff;
+        background-color: #A52422;
         color: #fff;
         border: none;
         border-radius: 5px;
         font-size: 1.1rem;
         cursor: pointer;
-        transition: background-color 0.3s ease;
     }
 
     #submitbutton:hover {
-        background-color: #0056b3;
+        background-color: #831d1b;
     }
 
     #submitbutton:active {
-        background-color: #004085;
+        background-color: #5e1412;
     }
 
     /* Star Rating System */
@@ -406,6 +403,7 @@
 
     /* Responsive Layout */
     @media (max-width: 1300px) {
+
         .cardcontainer {
             display: grid;
             grid-template-columns: 1fr;
@@ -424,6 +422,18 @@
 
         .output {
             grid-row: 3 / span 1;
+        }
+    }
+
+    @media (max-width: 840px) {
+
+        .reviewform {
+            margin: 0;
+            width: 90%;
+        }
+
+        .reviewtextarea {
+            height: 2em;
         }
     }
 </style>

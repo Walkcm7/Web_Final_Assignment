@@ -27,7 +27,8 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         max-width: 1000px;
         width: 100%;
-        gap: 16px;
+        gap: 1em;
+        box-sizing: border-box;
     }
 
     .avatar {
@@ -50,7 +51,7 @@
     }
 
     .profile-content p {
-        margin: 8px 0 0 0;
+        margin: 0.5em 0 0 0;
         font-style: italic;
         color: #666;
         font-size: 1rem;
@@ -59,7 +60,22 @@
     .rating {
         font-size: 1.5rem;
         color: #ffc700;
-        margin-left: 16px;
+        margin-left: 1em;
         display: inline-block;
+    }
+
+    @media (max-width: 840px) {
+
+        .user-profile {
+            margin-bottom: 0.6em;
+            padding: 0.2em;
+        }
+
+        .avatar {
+            width: 2em;
+            height: 2em;
+            margin-right: 0.2em;
+            margin-top: 0.5em;
+        }
     }
 </style>
